@@ -37,9 +37,10 @@ from instinctlab.motion_reference.utils import motion_interpolate_bilinear
 G1_CFG = G1_29DOF_TORSOBASE_POPSICLE_CFG
 PROPRIO_HISTORY_LENGTH = 8
 
+_REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "..", "..", "..", ".."))
 MOTION_FOLDER = (
-    "/home/xf/InstinctLab-main/actions/50cm_kneeClimbStep"
-    # "/home/xf/InstinctLab-main/actions/50cm_kneeClimbStep_noWall"
+    os.path.join(_REPO_ROOT, "actions", "50cm_kneeClimbStep")
+    # os.path.join(_REPO_ROOT, "actions", "50cm_kneeClimbStep_noWall")
 )
 
 

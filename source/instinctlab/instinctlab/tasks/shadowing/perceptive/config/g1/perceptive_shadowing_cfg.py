@@ -25,7 +25,8 @@ from instinctlab.sensors import get_link_prim_targets
 
 G1_CFG = G1_29DOF_TORSOBASE_POPSICLE_CFG
 
-MOTION_FOLDER = "/home/xf/InstinctLab-main/actions/50cm_kneeClimbStep"
+_REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "..", "..", "..", ".."))
+MOTION_FOLDER = os.path.join(_REPO_ROOT, "actions", "50cm_kneeClimbStep")
 
 
 @configclass
