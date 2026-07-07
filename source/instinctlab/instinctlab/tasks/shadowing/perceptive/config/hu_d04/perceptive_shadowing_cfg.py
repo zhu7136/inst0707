@@ -150,6 +150,30 @@ class HU_D04PerceptiveShadowingEnvCfg(perceptual_cfg.PerceptiveShadowingEnvCfg):
             },
         )
 
+        # Relax link_pos_too_far to ankles only: motion data is retargeted for G1, and HU_D04's
+        # shorter arm links cause wrist world-height to deviate >0.25m from the reference,
+        # triggering termination at reset. Ankle positions stay within threshold.
+        self.terminations.link_pos_too_far = DoneTermCfg(
+            func=instinct_mdp.link_pos_far_from_ref,
+            time_out=False,
+            params={
+                "asset_cfg": SceneEntityCfg("robot"),
+                "reference_cfg": SceneEntityCfg(
+                    "motion_reference",
+                    body_names=[
+                        "left_ankle_roll_link",
+                        "right_ankle_roll_link",
+                    ],
+                    preserve_order=True,
+                ),
+                "distance_threshold": 0.25,
+                "in_base_frame": False,
+                "check_at_keyframe_threshold": -1,
+                "height_only": True,
+                "print_reason": False,
+            },
+        )
+
         self.run_name = "hu_d04Perceptive" + "".join(
             [
                 (

@@ -79,86 +79,13 @@ _hacked_selected_files_ = [
 ]
 
 
-MOTION_NAME = "LafanFiltered"
-_path_ = os.path.expanduser("~/Datasets/UbisoftLAFAN1_GMR_g1_29dof_torsoBase_retargetted_instinctnpz")
+MOTION_NAME = "ActionsKneeClimb"
+_path_ = os.path.join(os.path.dirname(__file__), "..", "..", "..", "..", "..", "..", "..", "..", "actions", "50cm_kneeClimbStep")
 _hacked_selected_files_ = [
-    "aiming1_subject1_retargetted.npz",  # O
-    "aiming1_subject4_retargetted.npz",  # O
-    "aiming2_subject2_retargetted.npz",  # O
-    "aiming2_subject3_retargetted.npz",  # O
-    "aiming2_subject5_retargetted.npz",  # O
-    "dance1_subject1_retargetted.npz",  # O
-    "dance1_subject2_retargetted.npz",  # O
-    "dance1_subject3_retargetted.npz",  # O
-    "dance2_subject1_retargetted.npz",  # O
-    "dance2_subject2_retargetted.npz",  # O
-    "dance2_subject3_retargetted.npz",  # O
-    "dance2_subject4_retargetted.npz",  # O
-    "dance2_subject5_retargetted.npz",  # O
-    "fallAndGetUp1_subject1_retargetted.npz",  # O
-    "fallAndGetUp1_subject4_retargetted.npz",  # O
-    "fallAndGetUp1_subject5_retargetted.npz",  # O
-    "fallAndGetUp2_subject2_retargetted.npz",  # O
-    "fallAndGetUp2_subject3_retargetted.npz",  # O
-    "fallAndGetUp3_subject1_retargetted.npz",  # O
-    "fight1_subject2_retargetted.npz",  # O
-    "fight1_subject3_retargetted.npz",  # O
-    "fight1_subject5_retargetted.npz",  # O
-    "fightAndSports1_subject1_retargetted.npz",  # O
-    "fightAndSports1_subject4_retargetted.npz",  # O
-    "ground1_subject1_retargetted.npz",  # O
-    "ground1_subject4_retargetted.npz",  # O
-    "ground1_subject5_retargetted.npz",  # O
-    "ground2_subject2_retargetted.npz",  # O
-    "ground2_subject3_retargetted.npz",  # O
-    "jumps1_subject1_retargetted.npz",  # O
-    "jumps1_subject2_retargetted.npz",  # O
-    "jumps1_subject5_retargetted.npz",  # O
-    "multipleActions1_subject1_retargetted.npz",  # O
-    "multipleActions1_subject2_retargetted.npz",  # O
-    # "multipleActions1_subject3_retargetted.npz", # X
-    # "multipleActions1_subject4_retargetted.npz", # - (some sitting pose, but seems torlerable)
-    # "obstacles1_subject1_retargetted.npz", # X
-    # "obstacles1_subject2_retargetted.npz", # X
-    # "obstacles1_subject5_retargetted.npz", # X
-    # "obstacles2_subject1_retargetted.npz", # X
-    # "obstacles2_subject2_retargetted.npz", # X
-    # "obstacles2_subject5_retargetted.npz", # disable all obstacles
-    # "obstacles3_subject3_retargetted.npz", # disable all obstacles
-    # "obstacles3_subject4_retargetted.npz", # disable all obstacles
-    # "obstacles4_subject2_retargetted.npz", # disable all obstacles
-    # "obstacles4_subject3_retargetted.npz", # X  # disable all obstacles
-    # "obstacles4_subject4_retargetted.npz", # disable all obstacles
-    # "obstacles5_subject2_retargetted.npz", # disable all obstacles
-    # "obstacles5_subject3_retargetted.npz", # disable all obstacles
-    # "obstacles5_subject4_retargetted.npz", # disable all obstacles
-    # "obstacles6_subject1_retargetted.npz", # disable all obstacles
-    # "obstacles6_subject4_retargetted.npz", # disable all obstacles
-    # "obstacles6_subject5_retargetted.npz", # disable all obstacles
-    "push1_subject2_retargetted.npz",  # O
-    "pushAndFall1_subject1_retargetted.npz",  # O
-    "pushAndFall1_subject4_retargetted.npz",  # O
-    "pushAndStumble1_subject2_retargetted.npz",  # O
-    "pushAndStumble1_subject3_retargetted.npz",  # O
-    "pushAndStumble1_subject5_retargetted.npz",  # O
-    "run1_subject2_retargetted.npz",
-    "run1_subject5_retargetted.npz",
-    "run2_subject1_retargetted.npz",
-    "run2_subject4_retargetted.npz",
-    "sprint1_subject2_retargetted.npz",
-    "sprint1_subject4_retargetted.npz",
-    "walk1_subject1_retargetted.npz",
-    "walk1_subject2_retargetted.npz",
-    "walk1_subject5_retargetted.npz",
-    "walk2_subject1_retargetted.npz",
-    "walk2_subject3_retargetted.npz",
-    "walk2_subject4_retargetted.npz",
-    "walk3_subject1_retargetted.npz",
-    "walk3_subject2_retargetted.npz",
-    "walk3_subject3_retargetted.npz",
-    "walk3_subject4_retargetted.npz",
-    "walk3_subject5_retargetted.npz",
-    "walk4_subject1_retargetted.npz",  # O
+    "kneelClimbStep1-x-0.1-ziwen-retargetted.npz",
+    "superheroLanding-retargetted.npz",
+    "jumpsit2-ziwen-retargetted.npz",
+    "rollVault11-ziwen-retargetted.npz",
 ]
 
 # MOTION_NAME = "LafanGetup2S3"
@@ -183,9 +110,9 @@ class AmassMotionCfg(AmassMotionCfgBase):
     # path = os.path.expanduser("~/Datasets/UbisoftLAFAN1_GMR_g1_29dof_torsoBase_retargetted_instinctnpz")
     # path = os.path.expanduser("~/Datasets/AMASS_SMPLX-NG_GMR_29dof_g1_torsoBase_retargetted_20250901_instinctnpz")
     # path = _path_
-    path = os.path.expanduser("~/Datasets/NoKov-Marslab-Motions-instinctnpz/20251016_diveroll4_single")
+    path = os.path.join(os.path.dirname(__file__), "..", "..", "..", "..", "..", "..", "..", "..", "actions", "50cm_kneeClimbStep")
     retargetting_func = None
-    filtered_motion_selection_filepath = None
+    filtered_motion_selection_filepath = os.path.join(path, "metadata.yaml")
     motion_start_from_middle_range = [0.0, 0.8]
     motion_start_height_offset = 0.0
     ensure_link_below_zero_ground = False
