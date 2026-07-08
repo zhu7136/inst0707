@@ -1,0 +1,26 @@
+{
+  "taskBaseInfo": {
+    "projectId": "PRO_20260629_005",
+    "taskType": "1",
+    "trainType": "1",
+    "taskName": "Instinct-Perceptive-Shadowing-G1-v0",
+    "taskDescription": "G1 Instinct RL Perceptive Shadowing Training",
+    "taskTag": [],
+    "goodsId": "ESKU000001",
+    "imageId": "BJX00000170",
+    "imageVersion": "V000212",
+    "personalDataPath": ""
+  },
+  "taskCodeInfo": {
+    "codeType": "2",
+    "codeUrl": "[{\"codeUrl\":\"https://github.com/xf/InstinctLab-main.git\",\"versionType\":\"1\",\"versionName\":\"main\"}]",
+    "mainCodeUri": "",
+    "hparamsPath": null,
+    "startScript": "python scripts/instinct_rl/train.py --task=Instinct-Perceptive-Shadowing-G1-v0",
+    "isOpen": "1"
+  },
+  "runtimeReminderConfig": {
+    "enableRuntimeReminder": false,
+    "reminderDurations": []
+  }
+}

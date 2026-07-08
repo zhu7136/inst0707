@@ -44,6 +44,8 @@ try:
 except ImportError:
     WANDB_AVAILABLE = False
 
+from instinct_rl.utils.wandb_logger import WandBLogger
+
 import instinct_rl
 import instinct_rl.algorithms as algorithms
 import instinct_rl.modules as modules
@@ -117,13 +119,27 @@ class OnPolicyRunner:
         if self.use_wandb:
             wandb_project = self.cfg.get("wandb_project", "instinctlab")
             wandb_run_name = self.cfg.get("run_name", "")
-            wandb.init(
-                project=wandb_project,
-                name=wandb_run_name if wandb_run_name else None,
-                config=train_cfg,
-                dir=log_dir,
-                resume="allow"
-            )
+            wandb_entity = self.cfg.get("wandb_entity", None)
+            wandb_group = self.cfg.get("wandb_group", None)
+            wandb_tags = self.cfg.get("wandb_tags", [])
+
+            wandb_kwargs = {
+                "project": wandb_project,
+                "name": wandb_run_name if wandb_run_name else None,
+                "config": train_cfg,
+                "dir": log_dir,
+                "resume": "allow",
+            }
+            if wandb_entity:
+                wandb_kwargs["entity"] = wandb_entity
+            if wandb_group:
+                wandb_kwargs["group"] = wandb_group
+            if wandb_tags:
+                wandb_kwargs["tags"] = wandb_tags
+
+            self.wandb_logger = WandBLogger(enabled=True, **wandb_kwargs)
+        else:
+            self.wandb_logger = WandBLogger(enabled=False)
 
         _, _ = self.env.reset()
 
@@ -216,6 +232,9 @@ class OnPolicyRunner:
             start = time.time()
 
         self.save(os.path.join(self.log_dir, f"model_{self.current_learning_iteration}.pt"))
+
+        # Finish wandb run
+        self.wandb_logger.finish()
 
     def rollout_step(self, obs, critic_obs):
         actions = self.alg.act(obs, critic_obs)
@@ -456,7 +475,7 @@ class OnPolicyRunner:
                     if infotensor.dtype in [torch.long, torch.int, torch.int32, torch.int64]:
                         infotensor = infotensor.float()
                     wandb_log_dict[f"episode/{key}"] = infotensor.mean().item()
-            wandb.log(wandb_log_dict, step=self.current_learning_iteration)
+            self.wandb_logger.log(wandb_log_dict, step=self.current_learning_iteration)
 
     def add_git_repo_to_log(self, repo_path):
         self.git_status_repos.append(repo_path)
@@ -590,6 +609,7 @@ class OnPolicyRunner:
         """Add scalar to tensorboard writer. Will not happen if in multi-process and not rank 0."""
         if not self.is_mp_rank_other_process():
             self.writer.add_scalar(key, value, step)
+            self.wandb_logger.log({key: value}, step=step)
 
     def train_mode(self):
         """Change all related models into training mode (for dropout for example)"""

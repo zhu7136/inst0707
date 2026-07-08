@@ -293,9 +293,18 @@ class InstinctRlOnPolicyRunnerCfg:
     
     use_wandb: bool = False
     """Whether to use WANDB for logging. Default is False."""
-    
+
     wandb_project: str = "instinctlab"
-    """The WANDB project name. Default is "instinctlab"."""""
+    """The WANDB project name. Default is "instinctlab"."""
+
+    wandb_entity: str | None = None
+    """The WANDB entity (user or team). Default is None."""
+
+    wandb_group: str | None = None
+    """The WANDB group name for grouping runs. Default is None."""
+
+    wandb_tags: list[str] = []
+    """The WANDB tags for the run. Default is empty list."""""
 
     ##
     # Loading parameters

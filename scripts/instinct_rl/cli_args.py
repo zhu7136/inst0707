@@ -26,13 +26,11 @@ def add_instinct_rl_args(parser: argparse.ArgumentParser):
     arg_group.add_argument("--resume", default=None, action="store_true", help="Whether to resume from a checkpoint.")
     arg_group.add_argument("--load_run", type=str, default=None, help="Name of the run folder to resume from.")
     arg_group.add_argument("--checkpoint", type=str, default=None, help="Checkpoint file to resume from.")
-    # # -- logger arguments
-    # arg_group.add_argument(
-    #     "--logger", type=str, default=None, choices={"wandb", "tensorboard", "neptune"}, help="Logger module to use."
-    # )
-    # arg_group.add_argument(
-    #     "--log_project_name", type=str, default=None, help="Name of the logging project when using wandb or neptune."
-    # )
+    # -- wandb arguments
+    arg_group.add_argument("--use_wandb", default=None, action="store_true", help="Enable WandB logging.")
+    arg_group.add_argument("--wandb_project", type=str, default=None, help="WandB project name.")
+    arg_group.add_argument("--wandb_entity", type=str, default=None, help="WandB entity (user or team).")
+    arg_group.add_argument("--wandb_group", type=str, default=None, help="WandB group name for grouping runs.")
 
 
 def parse_instinct_rl_cfg(task_name: str, args_cli: argparse.Namespace) -> InstinctRlOnPolicyRunnerCfg:
@@ -61,7 +59,7 @@ def update_instinct_rl_cfg(agent_cfg: InstinctRlOnPolicyRunnerCfg, args_cli: arg
         args_cli: The command line arguments.
 
     Returns:
-        The updated configuration for Instinct-RL agent based on inputs.
+        The updated configuration for Instinct-RL agent.
     """
     # override the default configuration with CLI arguments
     if hasattr(args_cli, "seed") and args_cli.seed is not None:
@@ -74,11 +72,14 @@ def update_instinct_rl_cfg(agent_cfg: InstinctRlOnPolicyRunnerCfg, args_cli: arg
         agent_cfg.load_checkpoint = args_cli.checkpoint
     if args_cli.run_name is not None:
         agent_cfg.run_name = args_cli.run_name
-    # if args_cli.logger is not None:
-    #     agent_cfg.logger = args_cli.logger
-    # # set the project name for wandb and neptune
-    # if agent_cfg.logger in {"wandb", "neptune"} and args_cli.log_project_name:
-    #     agent_cfg.wandb_project = args_cli.log_project_name
-    #     agent_cfg.neptune_project = args_cli.log_project_name
+    # wandb arguments
+    if args_cli.use_wandb is not None:
+        agent_cfg.use_wandb = args_cli.use_wandb
+    if args_cli.wandb_project is not None:
+        agent_cfg.wandb_project = args_cli.wandb_project
+    if args_cli.wandb_entity is not None:
+        agent_cfg.wandb_entity = args_cli.wandb_entity
+    if args_cli.wandb_group is not None:
+        agent_cfg.wandb_group = args_cli.wandb_group
 
     return agent_cfg
